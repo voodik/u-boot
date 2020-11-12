@@ -1402,7 +1402,7 @@ distclean: mrproper
 	@rm -f $(FIP_FOLDER_SOC)/u-boot.bin.* $(FIP_FOLDER_SOC)/*.encrypt
 	@rm -f $(FIP_FOLDER)/u-boot.bin.* $(FIP_FOLDER)/*.bin $(FIP_FOLDER)/*.encrypt
 	@rm -f $(srctree)/fip/aml_encrypt_gxb
-	@make -C $(srctree)/fip distclean
+	@$(MAKE) -C $(srctree)/fip distclean
 
 backup:
 	F=`basename $(srctree)` ; cd .. ; \
