@@ -176,6 +176,8 @@ obj-$(CONFIG_CMD_BLOB) += blob.o
 
 obj-$(CONFIG_ARCH_ROCKCHIP) += rkimgtest.o
 
+obj-y += setbootdev.o
+
 endif # !CONFIG_SPL_BUILD
 
 # core command
