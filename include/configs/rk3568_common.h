@@ -80,6 +80,27 @@
 	"kernel_addr_c=0x04080000\0" \
 	"ramdisk_addr_r=0x0a200000\0"
 
+#define BOOT_FAT \
+	"boot_fat="	\
+		"for num in ${mmc_num}; do "	\
+			"setenv devnum ${num}; "	\
+			"if mmc dev ${devnum}; then "	\
+				"setenv devtype mmc; "	\
+				"run scan_dev_for_part; "	\
+			"fi; "	\
+		"done\0"	\
+	"mmc_num=0 1\0"	\
+	"scan_dev_for_part="	\
+		"part list ${devtype} ${devnum} devplist; "	\
+		"env exists devplist || setenv devplist 1; "	\
+		"for distro_bootpart in ${devplist}; do "	\
+			"if fstype ${devtype} "		\
+					"${devnum}:${distro_bootpart} "	\
+					"bootfstype; then "		\
+				"run scan_dev_for_boot; "	\
+			"fi; "	\
+		"done\0"
+
 #include <config_distro_bootcmd.h>
 
 #define CONFIG_EXTRA_ENV_SETTINGS \
@@ -87,11 +108,13 @@
 	"partitions=" PARTS_RKIMG \
 	ROCKCHIP_DEVICE_SETTINGS \
 	RKIMG_DET_BOOTDEV \
-	BOOTENV
+	BOOTENV \
+	BOOT_FAT
 
 #undef RKIMG_BOOTCOMMAND
 #define RKIMG_BOOTCOMMAND		\
 	"boot_fit;"			\
+	"run boot_fat;"			\
 	"boot_android ${devtype} ${devnum};" \
 	"run distro_bootcmd;"
 #endif
