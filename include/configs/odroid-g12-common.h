@@ -53,7 +53,7 @@
 
 /* Enable ir remote wake up for bl30 */
 #define CONFIG_IR_REMOTE_POWER_UP_KEY_VAL1	0x23DC4DB2 /* hardkernel ir --- power */
-#define CONFIG_IR_REMOTE_POWER_UP_KEY_VAL2	0XFFFFFFFF
+#define CONFIG_IR_REMOTE_POWER_UP_KEY_VAL2	0XE718FE01 /* Neo A3 ir power */
 #define CONFIG_IR_REMOTE_POWER_UP_KEY_VAL3	0xFFFFFFFF
 #define CONFIG_IR_REMOTE_POWER_UP_KEY_VAL4	0XFFFFFFFF
 #define CONFIG_IR_REMOTE_POWER_UP_KEY_VAL5	0xFFFFFFFF
@@ -193,6 +193,7 @@
                 "cvbsmode=${cvbsmode} osd_reverse=${osd_reverse} video_reverse=${video_reverse} "\
                 "androidboot.selinux=permissive jtag=disable "\
                 "androidboot.hardware=" CONFIG_DEVICE_PRODUCT " "\
+                "androidboot.variant=${variant} "\
                 "recovery_part=recovery recovery_offset=0 " \
                 "boot_device=${boot_device};" \
             "movi read dtbs 0 ${cramfsaddr}; " \
@@ -213,7 +214,7 @@
             "vout=${outputmode},enable cvbsmode=${cvbsmode} " \
             "hdmimode=${hdmimode} osd_reverse=${osd_reverse} video_reverse=${video_reverse} " \
             "androidboot.selinux=permissive androidboot.firstboot=${firstboot} jtag=disable " \
-            "androidboot.hardware=" CONFIG_DEVICE_PRODUCT "; " \
+            "androidboot.hardware=" CONFIG_DEVICE_PRODUCT " androidboot.variant=${variant}; " \
 	        "movi read dtbs 0 ${cramfsaddr}; " \
             "if test " CONFIG_DEVICE_PRODUCT " = odroidn2; then " \
                 "cramfsload ${dtb_mem_addr} meson64_" CONFIG_DEVICE_PRODUCT "_android.dtb;" \
