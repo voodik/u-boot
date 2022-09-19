@@ -510,7 +510,7 @@ static void cb_getvar(struct usb_ep *ep, struct usb_request *req)
 	char *s3;
 	size_t chars_left;
 
-	run_command("get_valid_slot", 0);
+//	run_command("get_valid_slot", 0);
 
 	strcpy(response, "OKAY");
 	chars_left = sizeof(response_str) - strlen(response) - 1;
