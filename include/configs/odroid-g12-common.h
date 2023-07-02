@@ -193,6 +193,7 @@
                 "cvbsmode=${cvbsmode} osd_reverse=${osd_reverse} video_reverse=${video_reverse} "\
                 "androidboot.selinux=permissive jtag=disable "\
                 "androidboot.hardware=" CONFIG_DEVICE_PRODUCT " "\
+                "androidboot.variant=${variant} "\
                 "recovery_part=recovery recovery_offset=0 " \
                 "boot_device=${boot_device};" \
             "movi read dtbs 0 ${cramfsaddr}; " \
@@ -213,7 +214,7 @@
             "vout=${outputmode},enable cvbsmode=${cvbsmode} " \
             "hdmimode=${hdmimode} osd_reverse=${osd_reverse} video_reverse=${video_reverse} " \
             "androidboot.selinux=permissive androidboot.firstboot=${firstboot} jtag=disable " \
-            "androidboot.hardware=" CONFIG_DEVICE_PRODUCT "; " \
+            "androidboot.hardware=" CONFIG_DEVICE_PRODUCT " androidboot.variant=${variant}; " \
 	        "movi read dtbs 0 ${cramfsaddr}; " \
             "if test " CONFIG_DEVICE_PRODUCT " = odroidn2; then " \
                 "cramfsload ${dtb_mem_addr} meson64_" CONFIG_DEVICE_PRODUCT "_android.dtb;" \
